@@ -4,6 +4,7 @@ namespace WP_Plugin_Name\Inc\Core;
 use WP_Plugin_Name as NS;
 use WP_Plugin_Name\Inc\Admin as Admin;
 use WP_Plugin_Name\Inc\Frontend as Frontend;
+use WP_Plugin_Name\Inc\Common as Common;
 
 /**
  * The core plugin class.
@@ -52,19 +53,30 @@ class Init {
 	protected $plugin_text_domain;
 
 	/**
+	 * The current environment of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      string    $environment    The current environment of this plugin.
+	 */
+	protected $environment;
+
+	/**
 	 * Initialize and define the core functionality of the plugin.
 	 */
 	public function __construct() {
 
 		$this->plugin_name = NS\PLUGIN_NAME;
 		$this->version = NS\PLUGIN_VERSION;
-				$this->plugin_basename = NS\PLUGIN_BASENAME;
-				$this->plugin_text_domain = NS\PLUGIN_TEXT_DOMAIN;
+		$this->plugin_basename = NS\PLUGIN_BASENAME;
+		$this->plugin_text_domain = NS\PLUGIN_TEXT_DOMAIN;
+		$this->environment = NS\ENVIRONMENT;
 
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+		$this->define_common_hooks();
 	}
 
 	/**
@@ -106,7 +118,7 @@ class Init {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Admin\Admin( $this->get_plugin_name(), $this->get_version(), $this->get_plugin_text_domain() );
+		$plugin_admin = new Admin\Admin( $this->get_plugin_name(), $this->get_version(), $this->get_plugin_text_domain(), $this->get_environment() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
@@ -123,6 +135,16 @@ class Init {
 		 * $this->loader->add_filter( 'plugin_action_links_' . $this->plugin_basename, $plugin_admin, 'add_additional_action_link' );
 		 *
 		 */
+
+		$this->loader->add_action('admin_menu', $plugin_admin, 'add_plugin_admin_menu');
+
+		$this->loader->add_action( 'add_meta_boxes_custom-post-type', $plugin_admin, 'add_custom_post_meta_boxes');
+
+		$this->loader->add_action( 'save_post_custom-post-type', $plugin_admin, 'save_meta_box_data');
+
+		$this->loader->add_action( 'init', $plugin_admin, 'register_plugin_settings');
+
+		$this->loader->add_action( 'media_buttons', $plugin_admin, 'add_media_button' );
 	}
 
 	/**
@@ -133,10 +155,24 @@ class Init {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Frontend\Frontend( $this->get_plugin_name(), $this->get_version(), $this->get_plugin_text_domain() );
+		$plugin_public = new Frontend\Frontend( $this->get_plugin_name(), $this->get_version(), $this->get_plugin_text_domain(), $this->get_environment() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+
+		$this->loader->add_action( 'init', $plugin_public, 'create_shortcode' );
+	}
+
+	/**
+	 * Register all of the hooks related to common/shared admin and public-facing functionality
+	 *
+	 * @access    private
+	 */
+	private function define_common_hooks() {
+
+		$plugin_common = new Common\Common( $this->get_plugin_name(), $this->get_version(), $this->get_plugin_text_domain(), $this->get_environment() );
+
+		$this->loader->add_action( 'init', $plugin_common, 'register_post_types' );
 
 	}
 
@@ -182,6 +218,16 @@ class Init {
 	 */
 	public function get_plugin_text_domain() {
 		return $this->plugin_text_domain;
+	}
+
+	/**
+	 * Retrieve the environment of the plugin.
+	 *
+	 * @since     1.0.0
+	 * @return    string    The environment of the plugin.
+	 */
+	public function get_environment() {
+		return $this->environment;
 	}
 
 }

@@ -49,6 +49,7 @@ define( NS . 'PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 define( NS . 'PLUGIN_TEXT_DOMAIN', 'wp-plugin-name' );
 
+require_once( PLUGIN_NAME_DIR . 'env.php' );
 
 /**
  * Autoload Classes

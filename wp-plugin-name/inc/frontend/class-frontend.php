@@ -43,6 +43,15 @@ class Frontend {
 	private $plugin_text_domain;
 
 	/**
+	 * The current environment of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $environment    The current environment of this plugin.
+	 */
+	private $environment;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since       1.0.0
@@ -50,11 +59,12 @@ class Frontend {
 	 * @param       string $version            The version of this plugin.
 	 * @param       string $plugin_text_domain The text domain of this plugin.
 	 */
-	public function __construct( $plugin_name, $version, $plugin_text_domain ) {
+	public function __construct( $plugin_name, $version, $plugin_text_domain, $environment) {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 		$this->plugin_text_domain = $plugin_text_domain;
+		$this->environment = $environment;
 
 	}
 
@@ -77,8 +87,12 @@ class Frontend {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/wp-plugin-name-frontend.css', array(), $this->version, 'all' );
-
+		if($this->environment == 'development'){
+			wp_enqueue_style( $this->plugin_name, 'http://localhost:9001/assets/build/css/wp-plugin-name-frontend.css', array( ), time(), false );
+		}
+		else {
+			wp_enqueue_style( $this->plugin_name, plugins_url( $this->plugin_name . '/assets/build/css/wp-plugin-name-frontend.css' ), array(), $this->version, 'all' );
+		}
 	}
 
 	/**
@@ -100,8 +114,28 @@ class Frontend {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/wp-plugin-name-frontend.js', array( 'jquery' ), $this->version, false );
+		if($this->environment == 'development'){
+			wp_enqueue_script( $this->plugin_name, 'http://localhost:9001/assets/build/js/wp-plugin-name-frontend.js', array( 'jquery' ), time(), false );
+		}
+		else{
+			wp_enqueue_script( $this->plugin_name, plugins_url( $this->plugin_name . '/assets/build/js/wp-plugin-name-frontend.js' ), array( 'jquery' ), $this->version, false );
+		}
+	}
 
+	/**
+	 * Register a custom shortcode
+	 *
+	 * @since    1.0.0
+	 */
+	public function create_shortcode(){
+		
+		add_shortcode( 'custom_shortcode', function ($atts) {
+			$attributes = shortcode_atts( array(
+				'value' => null,
+			  ), $atts );
+		
+			return "<div class='wp-plugin-name-shortcode' data-props='".json_encode($attributes)."'></div>";
+		} );
 	}
 
 }
