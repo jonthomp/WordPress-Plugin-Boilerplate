@@ -16,7 +16,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "./assets/build"),
     filename: "js/[name].js",
-    library: "wp-plugin-name"
+    library: "wrsc"
   },
 
   plugins: [

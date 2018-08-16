@@ -6,7 +6,7 @@ This project will also include some additional build tools for preparing your pl
 
 ## Contents
 
-The `wp-plugin-name` directory contains the source code - a fully executable WordPress plugin.
+The `bob` directory contains the source code - a fully executable WordPress plugin.
 
 ## Features
 
@@ -21,12 +21,12 @@ The `wp-plugin-name` directory contains the source code - a fully executable Wor
 
 The Boilerplate can be installed directly into your plugins folder "as-is". You will want to rename it and the classes inside of it to fit your needs.
 
-- Copy wp-plugin-name to your plugin's directory and rename it to your plugin's name
+- Copy bob to your plugin's directory and rename it to your plugin's name
 - Perform a find and replace at the project level as follows:
-  1.  Find the text `wp-plugin-name` and replace with `your-plugin-name` in all files
+  1.  Find the text `bob` and replace with `your-plugin-name` in all files
   2.  Find the text `WP_Plugin_Name` and replace with `Your_Plugin_Name` in all files
-  3.  Rename the `scss` and `js` files under `assets\src\js`, `assets\src\scss` and replace the string `wp-plugin-name` with `your-plugin-name`
-  4.  Rename the `pot` file under `languages` and replace the string `wp-plugin-name` with `your-plugin-name`
+  3.  Rename the `scss` and `js` files under `assets\src\js`, `assets\src\scss` and replace the string `bob` with `your-plugin-name`
+  4.  Rename the `pot` file under `languages` and replace the string `bob` with `your-plugin-name`
   5.  Find the text `http://example.com` and replace with your URI in all files
   6.  Find the text `Your Name or Your Company` and replace with your name in all files
 - Activate the plugin
@@ -35,25 +35,25 @@ The Boilerplate can be installed directly into your plugins folder "as-is". You 
 
 ```bash
 # After having downloaded and extracted the archive, navigate to the folder containing the plugin
-$ mv wp-plugin-name my-awesome-plugin
+$ mv bob my-awesome-plugin
 $ cd my-awesome-plugin
 ```
 
 ```bash
-# Replace text for "example.com/wp-plugin-name-uri" and "example.com"
-$ grep -rl "example.com/wp-plugin-name-uri" ./* | xargs sed -i "s/example.com\/wp-plugin-name-uri/somedomain.com\/my-awesome-plugin-uri/g"
+# Replace text for "example.com/bob-uri" and "example.com"
+$ grep -rl "example.com/bob-uri" ./* | xargs sed -i "s/example.com\/bob-uri/somedomain.com\/my-awesome-plugin-uri/g"
 
 $ grep -rl "example.com" ./* | xargs sed -i "s/example.com/somedomain.com/g"
 ```
 
 ```bash
-# Replace text for "wp-plugin-name"
-$ grep -rl "wp-plugin-name" ./* | xargs sed -i "s/wp-plugin-name/my-awesome-plugin/g"
+# Replace text for "bob"
+$ grep -rl "bob" ./* | xargs sed -i "s/bob/my-awesome-plugin/g"
 ```
 
 ```bash
-# Replace text for "wp_plugin_name"
-$ grep -rl "wp_plugin_name" ./* | xargs sed -i "s/wp_plugin_name/my_awesome_plugin/g"
+# Replace text for "bob"
+$ grep -rl "bob" ./* | xargs sed -i "s/bob/my_awesome_plugin/g"
 ```
 
 ```bash
@@ -62,8 +62,8 @@ $ grep -rl "WP_Plugin_Name" ./* | xargs sed -i "s/WP_Plugin_Name/My_Awesome_Plug
 ```
 
 ```bash
-# Rename Files with the text "wp-plugin-name" in them
-$ find . -iname '*wp-plugin-name*' -exec rename 's/wp-plugin-name/my-awesome-plugin/' {} \;
+# Rename Files with the text "bob" in them
+$ find . -iname '*bob*' -exec rename 's/bob/my-awesome-plugin/' {} \;
 ```
 
 ```bash
@@ -79,18 +79,18 @@ Note that this will activate the source code of the Boilerplate, but because the
 
 If you want to include your own classes, or third-party libraries
 
-- `wp-plugin-name/inc/admin` - admin-specific functionality
-- `wp-plugin-name/inc/core` - plugin core to register hooks, load files etc
-- `wp-plugin-name/inc/frontend` - public-facing functionality
-- `wp-plugin-name/inc/common` - functionality shared between the admin area and the public-facing parts
-- `wp-plugin-name/inc/libraries` - libraries that the plugin may use
+- `bob/inc/admin` - admin-specific functionality
+- `bob/inc/core` - plugin core to register hooks, load files etc
+- `bob/inc/frontend` - public-facing functionality
+- `bob/inc/common` - functionality shared between the admin area and the public-facing parts
+- `bob/inc/libraries` - libraries that the plugin may use
 
 ### Javascript and SCSS
 
-- `wp-plugin-name/assets/src/js/wp-plugin-name-admin.js` - admin-specific javascript
-- `wp-plugin-name/assets/src/js/wp-plugin-name-frontend.js` - public-facing javascript
-- `wp-plugin-name/assets/src/scss/wp-plugin-name-admin.scss` - admin-specific SCSS
-- `wp-plugin-name/assets/src/scss/wp-plugin-name-frontend.scss` - public-facing SCSS
+- `bob/assets/src/js/bob-admin.js` - admin-specific javascript
+- `bob/assets/src/js/bob-frontend.js` - public-facing javascript
+- `bob/assets/src/scss/bob-admin.scss` - admin-specific SCSS
+- `bob/assets/src/scss/bob-frontend.scss` - public-facing SCSS
 
 ### PHP Version
 

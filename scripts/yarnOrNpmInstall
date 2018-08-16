@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if [ -x "$(command -v yarn)" ]; then
+  yarn install
+elif [ -x "$(command -v npm)" ]; then
+  npm install
+else
+  echo "Error! Neither yarn nor npm installed"
+  exit 1
+fi

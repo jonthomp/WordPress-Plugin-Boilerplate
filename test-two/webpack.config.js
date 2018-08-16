@@ -9,14 +9,14 @@ module.exports = {
   context: path.resolve(__dirname, "./assets/src"),
 
   entry: {
-    "wp-plugin-name-admin": "./js/wp-plugin-name-admin.js",
-    "wp-plugin-name-frontend": "./js/wp-plugin-name-frontend.js"
+    "test-two-admin": "./js/test-two-admin.js",
+    "test-two-frontend": "./js/test-two-frontend.js"
   },
 
   output: {
     path: path.resolve(__dirname, "./assets/build"),
     filename: "js/[name].js",
-    library: "wp-plugin-name"
+    library: "test-two"
   },
 
   plugins: [

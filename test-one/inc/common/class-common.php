@@ -73,22 +73,6 @@ class Common {
 	 * @since    1.0.0
 	 */
 	public function register_post_types() {
-
-		$labels = array( 
-			'name' => _x( 'Galleries', 'gallery' ),
-			'singular_name' => _x( 'Gallery', 'gallery' ),
-			'add_new' => _x( 'Add New', 'gallery' ),
-			'add_new_item' => _x( 'Add New Gallery', 'gallery' ),
-			'edit_item' => _x( 'Edit Gallery', 'gallery' ),
-			'new_item' => _x( 'New Gallery', 'gallery' ),
-			'view_item' => _x( 'View Gallery', 'gallery' ),
-			'search_items' => _x( 'Search Galleries', 'gallery' ),
-			'not_found' => _x( 'No galleries found', 'gallery' ),
-			'not_found_in_trash' => _x( 'No galleries found in Trash', 'gallery' ),
-			'parent_item_colon' => _x( 'Parent Gallery:', 'gallery' ),
-			'menu_name' => _x( 'Galleries', 'gallery' ),
-		);
-		
 		
     
         $args = array(

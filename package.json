@@ -1,0 +1,20 @@
+{
+  "name": "WordPress-Plugin-Boilerplate",
+  "version": "1.0.0",
+  "main": "wpb.js",
+  "repository": "https://github.com/jonthomp/WordPress-Plugin-Boilerplate.git",
+  "author": "Jon Thompson <jon@jont.me>",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "commander": "^2.16.0",
+    "fs-extra": "^7.0.0",
+    "path": "^0.12.7",
+    "readline-sync": "^1.4.9",
+    "renamer": "^1.0.0",
+    "shelljs": "^0.8.2"
+  },
+  "scripts": {
+    "wpb": "node ./src/wpb.js"
+  }
+}
